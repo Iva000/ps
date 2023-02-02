@@ -23,6 +23,8 @@ public enum Operation implements Serializable{
     EDIT_PERSON,
     EDIT_PET,
     SEARCH_PEOPLE,
-    SEARCH_PETS
+    SEARCH_PETS,
+    ADOPTION_ADD,
+    GET_ALL_ADOPTIONS
     
 }

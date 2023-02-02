@@ -106,6 +106,11 @@ public class Person implements Serializable{
         final Person other = (Person) obj;
         return this.jmbg == other.jmbg;
     }
+
+    @Override
+    public String toString() {
+        return getJmbg() + ", " + getName() + " " + getSurname();
+    }
     
     
     

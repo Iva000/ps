@@ -103,6 +103,11 @@ public class Pet implements Serializable{
         }
         return Objects.equals(this.type, other.type);
     }
+
+    @Override
+    public String toString() {
+        return id + ", " + type + ", " + name;
+    }
     
     
     

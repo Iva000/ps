@@ -9,6 +9,7 @@ import commonCommunication.Receiver;
 import commonCommunication.Request;
 import commonCommunication.Response;
 import commonCommunication.Sender;
+import domain.Adoption;
 import domain.City;
 import domain.Person;
 import domain.Pet;
@@ -212,6 +213,32 @@ public class Communication {
         
         if(response.getException()== null){
             return (List<Pet>) response.getResult();
+        }
+        else{
+            throw response.getException();
+        }
+    }
+    
+    public void addAdoption(Adoption adoption) throws Exception{
+        Request request = new Request(adoption, Operation.ADOPTION_ADD);
+        sender.send(request);
+        
+        Response response = (Response) receiver.receive();
+        if(response.getException() == null){
+        }
+        else{
+            throw response.getException();
+        }
+    }
+    
+    public List<Adoption> getAllAdoptions() throws Exception {
+        Request request = new Request(null, Operation.GET_ALL_ADOPTIONS);
+        sender.send(request);
+        
+        Response response = (Response) receiver.receive();
+        
+        if(response.getException()== null){
+            return (List<Adoption>) response.getResult();
         }
         else{
             throw response.getException();

@@ -4,12 +4,14 @@
  */
 package controller;
 
+import domain.Adoption;
 import domain.Person;
 import domain.Pet;
 import domain.User;
 import java.util.List;
 import repository.Repository;
 import repository.db.DbRepository;
+import repository.db.impl.RepositoryDbAdoption;
 import repository.db.impl.RepositoryDbCity;
 import repository.db.impl.RepositoryDbPerson;
 import repository.db.impl.RepositoryDbPet;
@@ -27,6 +29,7 @@ public class Controller {
     private final Repository repositoryCity;
     private final Repository repositoryType;
     private final Repository repositoryPet;
+    private final Repository repositoryAdoption;
     
     private static Controller instance;
 
@@ -36,6 +39,7 @@ public class Controller {
         this.repositoryCity = new RepositoryDbCity();
         this.repositoryType = new RepositoryDbType();
         this.repositoryPet = new RepositoryDbPet();
+        this.repositoryAdoption = new RepositoryDbAdoption();
     }
 
     public static Controller getInstance() {
@@ -161,5 +165,23 @@ public class Controller {
     
     public Object searchPets(String syllable) throws Exception{
         return repositoryPet.getAll(syllable);
+    }
+    
+    public void addAdoption(Adoption adoption) throws Exception{
+        ((DbRepository) repositoryAdoption).connect();
+        
+        try{
+            repositoryAdoption.add(adoption);
+            ((DbRepository) repositoryAdoption).commit();
+        }catch(Exception ex){
+            ex.printStackTrace();
+            ((DbRepository) repositoryAdoption).rollback();
+        }finally{
+            ((DbRepository) repositoryAdoption).disconnect();
+        }
+    }
+    
+    public Object getAllAdoptions() throws Exception{
+        return repositoryAdoption.getAll();
     }
 }

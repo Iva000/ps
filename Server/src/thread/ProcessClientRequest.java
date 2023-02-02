@@ -9,6 +9,7 @@ import commonCommunication.Request;
 import commonCommunication.Response;
 import commonCommunication.Sender;
 import controller.Controller;
+import domain.Adoption;
 import domain.Person;
 import domain.Pet;
 import domain.User;
@@ -87,6 +88,13 @@ public class ProcessClientRequest extends Thread{
                         case SEARCH_PETS:
                             syllable = (String) request.getArgument();
                             response.setResult(Controller.getInstance().searchPets(syllable));
+                            break;
+                        case ADOPTION_ADD:
+                            Adoption adoption = (Adoption)request.getArgument();
+                            Controller.getInstance().addAdoption(adoption);
+                            break;
+                        case GET_ALL_ADOPTIONS:
+                            response.setResult(Controller.getInstance().getAllAdoptions());
                             break;
                     }
                 }catch(Exception e){
