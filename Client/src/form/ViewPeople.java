@@ -80,18 +80,18 @@ public class ViewPeople extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(33, 33, 33)
+                        .addGap(28, 28, 28)
                         .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel1))
+                        .addGap(12, 12, 12)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,9 +100,9 @@ public class ViewPeople extends javax.swing.JDialog {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(37, 37, 37)
                 .addComponent(jButton1)
-                .addGap(34, 34, 34)
+                .addGap(36, 36, 36)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -118,8 +118,12 @@ public class ViewPeople extends javax.swing.JDialog {
             if(index == -1){
                 JOptionPane.showMessageDialog(this, "Morate izabrati osobu iz tabele!");
             }else{
-                List<domain.Person> people = Communication.getInstance().getAllPeople();
-                domain.Person person = people.get(index);
+                domain.Person person = new domain.Person();
+                String jmbg = ((PeopleTableModel) tblPeople.getModel()).getJmbg(index);
+                person.setJmbg(jmbg);
+//                List<domain.Person> people = Communication.getInstance().getAllPeople();
+//                domain.Person person = people.get(index);
+                person = Communication.getInstance().getPerson(person);
                 Person form = new Person(null, true, FormMode.FORM_VIEW, person);
                 form.setVisible(true);
             }
@@ -130,8 +134,10 @@ public class ViewPeople extends javax.swing.JDialog {
 
     private void txtSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyTyped
         try {
-            String syllable = txtSearch.getText().trim();
-            tblPeople.setModel(new PeopleTableModel(Communication.getInstance().searchPeople(syllable)));
+            String sur = txtSearch.getText().trim();
+            domain.Person person = new domain.Person();
+            person.setSurname(sur);
+            tblPeople.setModel(new PeopleTableModel(Communication.getInstance().searchPeople(person)));
         } catch (Exception ex) {
             Logger.getLogger(ViewPeople.class.getName()).log(Level.SEVERE, null, ex);
         }

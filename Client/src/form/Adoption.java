@@ -11,9 +11,12 @@ import java.time.Month;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -195,6 +198,7 @@ public class Adoption extends javax.swing.JFrame {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         try{
             domain.Adoption adoption = new domain.Adoption();
+            if(checkAdoption()){
             adoption.setPerson((domain.Person)comboPerson.getSelectedItem());
             adoption.setPet((domain.Pet)comboPets.getSelectedItem());
             adoption.setDate(LocalDate.of(Integer.parseInt(comboYear.getSelectedItem().toString()),
@@ -205,9 +209,15 @@ public class Adoption extends javax.swing.JFrame {
             if(radioNo.isSelected())
                 adoption.setFirstTime(false);
             adoption.setVetReport(txtVet.getText()); 
-            Communication.getInstance().addAdoption(adoption);
-            this.dispose();
-            JOptionPane.showMessageDialog(this, "Udomljavanje je uspešno dodato!");
+            
+            if(Communication.getInstance().getAllAdoptions().contains(adoption)){
+                JOptionPane.showMessageDialog(this, "Udomljavanje sa ovakvim karakteristikama već postoji u bazi!");
+            }else{
+                Communication.getInstance().addAdoption(adoption);
+                JOptionPane.showMessageDialog(this, "Udomljavanje je uspešno dodato!");
+                this.dispose();
+            }
+            }
         }catch(Exception ex){
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
@@ -321,6 +331,26 @@ public class Adoption extends javax.swing.JFrame {
     public JComboBox<Integer> getComboYear() {
         return comboYear;
     }
+
+    public JTextArea getTxtVet() {
+        return txtVet;
+    }
+
+    @Override
+    public void setDefaultCloseOperation(int operation) {
+        super.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+
+    public ButtonGroup getButtonGroup1() {
+        return buttonGroup1;
+    }
     
+    private boolean checkAdoption(){
+        if(getComboPerson().getSelectedIndex() == -1 || getComboPets().getSelectedIndex() == -1 || getComboDay().getSelectedIndex() == -1 || getComboMonth().getSelectedIndex() == -1 || getComboYear().getSelectedIndex() == -1 || getTxtVet().getText()== null || getTxtVet().getText().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Sva polja moraju biti popunjena!");
+            return false;
+        }
+        return true;
+    }
     
 }

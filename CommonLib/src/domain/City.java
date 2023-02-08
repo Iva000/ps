@@ -5,13 +5,15 @@
 package domain;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Objects;
 
 /**
  *
  * @author Iva
  */
-public class City implements Serializable{
+public class City implements GenericEntiy{
     
     private int id;
     private String name;
@@ -69,6 +71,51 @@ public class City implements Serializable{
     @Override
     public String toString() {
         return getName();
+    }
+
+    @Override
+    public String getTableName() {
+        return "city";
+    }
+
+    @Override
+    public String getInsertColumns() {
+        return "id, name";
+    }
+
+    @Override
+    public String getInsertValues() {
+        return "" + id + ", " + name;
+    }
+
+    @Override
+    public void setId(Object id) {
+        this.id = (Integer) id;
+    }
+
+    @Override
+    public String getUpdateValues() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public String getIndentificator() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public GenericEntiy getEntiy(ResultSet rs) throws SQLException{
+        return new City(rs.getInt("id"), rs.getString("name"));
+    }
+
+    @Override
+    public String getJoinText() {
+        return "";
+    }
+
+    @Override
+    public String getSelectValues(Object param) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     

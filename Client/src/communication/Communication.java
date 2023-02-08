@@ -59,6 +59,17 @@ public class Communication {
         }
     }
     
+    public String logOut() throws Exception {
+        Request request = new Request(null, Operation.LOGOUT);
+        sender.send(request);
+        Response response = (Response) receiver.receive();
+        if (response.getException() == null) {
+            return  response.getResult().toString();
+        } else {
+            throw response.getException();
+        }
+    }
+    
     public List<City> getAllCities() throws Exception{
         Request request = new Request(null, Operation.GET_ALL_CITIES);
         sender.send(request);
@@ -191,8 +202,8 @@ public class Communication {
         }
     }
     
-    public List<Person> searchPeople(String syllable) throws Exception{
-        Request request = new Request(syllable, Operation.SEARCH_PEOPLE);
+    public List<Person> searchPeople(Person person) throws Exception{
+        Request request = new Request(person, Operation.SEARCH_PEOPLE);
         sender.send(request);
         
         Response response = (Response) receiver.receive();
@@ -205,8 +216,8 @@ public class Communication {
         }
     }
 
-    public List<Pet> searchPets(String syllable) throws Exception {
-        Request request = new Request(syllable, Operation.SEARCH_PETS);
+    public List<Pet> searchPets(Pet pet) throws Exception {
+        Request request = new Request(pet, Operation.SEARCH_PETS);
         sender.send(request);
         
         Response response = (Response) receiver.receive();
@@ -239,6 +250,34 @@ public class Communication {
         
         if(response.getException()== null){
             return (List<Adoption>) response.getResult();
+        }
+        else{
+            throw response.getException();
+        }
+    }
+    
+    public Person getPerson(Person person) throws Exception{
+        Request request = new Request(person, Operation.GET_PERSON);
+        sender.send(request);
+        
+        Response response = (Response) receiver.receive();
+        
+        if(response.getException()== null){
+            return (Person) response.getResult();
+        }
+        else{
+            throw response.getException();
+        }
+    }
+    
+     public Pet getPet(Pet pet) throws Exception{
+        Request request = new Request(pet, Operation.GET_PET);
+        sender.send(request);
+        
+        Response response = (Response) receiver.receive();
+        
+        if(response.getException()== null){
+            return (Pet) response.getResult();
         }
         else{
             throw response.getException();

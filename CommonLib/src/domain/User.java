@@ -5,13 +5,15 @@
 package domain;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Objects;
 
 /**
  *
  * @author Iva
  */
-public class User implements Serializable{
+public class User implements GenericEntiy{
     
     private int id;
     private String firstname;
@@ -99,6 +101,51 @@ public class User implements Serializable{
         }
         final User other = (User) obj;
         return this.id == other.id;
+    }
+
+    @Override
+    public String getTableName() {
+        return "user";
+    }
+
+    @Override
+    public String getInsertColumns() {
+        return "id, firstname, lastname, username, password";
+    }
+
+    @Override
+    public String getInsertValues() {
+        return "" + id + ", " + firstname + ", " + lastname + ", " + username + ", " + password;
+    }
+
+    @Override
+    public void setId(Object id) {
+        this.id =(Integer) id;
+    }
+
+    @Override
+    public String getUpdateValues() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public String getIndentificator() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public GenericEntiy getEntiy(ResultSet rs) throws SQLException {
+        return new User(rs.getInt("id"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("username"), rs.getString("password"));
+    }
+
+    @Override
+    public String getJoinText() {
+        return "";
+    }
+
+    @Override
+    public String getSelectValues(Object param) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     

@@ -16,7 +16,7 @@ import javax.swing.table.AbstractTableModel;
 public class PetTableModel extends AbstractTableModel{
 
     private final List<Pet> pets;
-    private final String[] columns = {"ID", "Ime", "Godine", "Vrsta", "Opis"};
+    private final String[] columns = {"ID", "Ime", "Pol", "Godine", "Vrsta", "Opis"};
 
     public PetTableModel(List<Pet> pets) {
         this.pets = pets;
@@ -41,9 +41,10 @@ public class PetTableModel extends AbstractTableModel{
         switch(columnIndex){
             case 0: return pet.getId();
             case 1: return pet.getName();
-            case 2: return pet.getAge();
-            case 3: return pet.getType();
-            case 4: return pet.getDescription();
+            case 2: return pet.getGender();
+            case 3: return pet.getAge();
+            case 4: return pet.getType();
+            case 5: return pet.getDescription();
             default: return "n/a";
         }
     }
@@ -53,5 +54,9 @@ public class PetTableModel extends AbstractTableModel{
        return columns[column];
     }
     
+    public int getId(int row){
+        Pet pet = pets.get(row);
+        return pet.getId();
+    }
     
 }

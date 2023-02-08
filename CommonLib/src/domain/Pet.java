@@ -5,27 +5,31 @@
 package domain;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Objects;
 
 /**
  *
  * @author Iva
  */
-public class Pet implements Serializable{
+public class Pet implements GenericEntiy{
     
     private int id;
     private int age;
     private String name;
+    private Gender gender;
     private Type type;
     private String description;
 
     public Pet() {
     }
 
-    public Pet(int id, int age, String name, Type type, String description) {
+    public Pet(int id, int age, String name, Gender gender,Type type, String description) {
         this.id = id;
         this.age = age;
         this.name = name;
+        this.gender = gender;
         this.type = type;
         this.description = description;
     }
@@ -40,6 +44,10 @@ public class Pet implements Serializable{
 
     public String getName() {
         return name;
+    }
+
+    public Gender getGender() {
+        return gender;
     }
 
     public Type getType() {
@@ -60,6 +68,10 @@ public class Pet implements Serializable{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 
     public void setType(Type type) {
@@ -107,6 +119,52 @@ public class Pet implements Serializable{
     @Override
     public String toString() {
         return id + ", " + type + ", " + name;
+    }
+
+    @Override
+    public String getTableName() {
+        return "pet";
+    }
+
+    @Override
+    public String getInsertColumns() {
+        return "id, name, age, type, description, gender";
+    }
+
+    @Override
+    public String getInsertValues() {
+        return "" + id + ", '" + name + "', " + age + ", " + type.getId() + ", '" + description + "', '" + gender.toString()+"'";
+    }
+
+    @Override
+    public void setId(Object id) {
+        this.id = (Integer) id;
+    }
+
+    @Override
+    public String getUpdateValues() {
+        return " name ='"+name + "', age=" + age + ", type=" + type.getId() + ", description='" + description + "', gender='" + gender.toString()+"'"; 
+    }
+
+    @Override
+    public String getIndentificator(){
+        return " pet.id = "+id;
+    }
+
+    @Override
+    public GenericEntiy getEntiy(ResultSet rs) throws SQLException{
+        Type type = new Type();
+        return new Pet(rs.getInt("id"), rs.getInt("age"), rs.getString("pet.name"), Gender.valueOf(rs.getString("gender")), (Type) type.getEntiy(rs), rs.getString("description"));
+    }
+
+    @Override
+    public String getJoinText() {
+        return " inner join type on pet.type = type.id";
+    }
+
+    @Override
+    public String getSelectValues(Object param) {
+        return " where pet.name like '%"+((Pet)param).getName()+"%'";
     }
     
     

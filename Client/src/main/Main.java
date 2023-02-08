@@ -17,10 +17,10 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-//        Login form = new Login();
-//        form.setVisible(true);
-Homepage form = new Homepage();
-form.setVisible(true);
+        Login form = new Login();
+        form.setVisible(true);
+//Homepage form = new Homepage();
+//form.setVisible(true);
     }
     
 }

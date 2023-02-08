@@ -16,7 +16,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class PeopleTableModel extends AbstractTableModel{
     
-    private final List<Person> people;
+    private List<Person> people;
     private final String[] columns = {"JMBG", "Ime", "Prezime", "Godina rođenja", "Grad", "Broj telefona"};
 
     public PeopleTableModel(List<Person> people) {
@@ -55,5 +55,13 @@ public class PeopleTableModel extends AbstractTableModel{
         return columns[column];
     }
     
+    public void refresh(List<Person> people){
+        this.people = people;
+        fireTableDataChanged();
+    }
     
+    public String getJmbg(int row){
+        Person person = people.get(row);
+        return person.getJmbg();
+    }
 }

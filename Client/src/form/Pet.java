@@ -5,6 +5,7 @@
 package form;
 
 import communication.Communication;
+import domain.Gender;
 import form.util.FormMode;
 import java.util.List;
 import java.util.logging.Level;
@@ -45,17 +46,19 @@ public class Pet extends javax.swing.JDialog {
 
         btnSave = new javax.swing.JButton();
         panelPet = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtId = new javax.swing.JTextField();
         txtName = new javax.swing.JTextField();
         txtAge = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtDescription = new javax.swing.JTextArea();
         comboTypes = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        comboGender = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        txtId = new javax.swing.JTextField();
         btnDelete = new javax.swing.JButton();
         btnMakeChanges = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
@@ -72,8 +75,6 @@ public class Pet extends javax.swing.JDialog {
         panelPet.setBorder(javax.swing.BorderFactory.createTitledBorder("Ljubimac:"));
         panelPet.setToolTipText("Pet:");
 
-        jLabel1.setText("ID:");
-
         jLabel2.setText("Ime:");
 
         jLabel3.setText("Godine:");
@@ -86,6 +87,10 @@ public class Pet extends javax.swing.JDialog {
         txtDescription.setRows(5);
         jScrollPane1.setViewportView(txtDescription);
 
+        jLabel6.setText("Pol:");
+
+        jLabel1.setText("ID:");
+
         javax.swing.GroupLayout panelPetLayout = new javax.swing.GroupLayout(panelPet);
         panelPet.setLayout(panelPetLayout);
         panelPetLayout.setHorizontalGroup(
@@ -93,49 +98,51 @@ public class Pet extends javax.swing.JDialog {
             .addGroup(panelPetLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(panelPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel1))
                 .addGap(32, 32, 32)
                 .addGroup(panelPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1)
-                    .addComponent(txtId)
                     .addComponent(txtName)
                     .addComponent(txtAge)
-                    .addComponent(comboTypes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(53, Short.MAX_VALUE))
+                    .addComponent(comboTypes, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(comboGender, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtId))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         panelPetLayout.setVerticalGroup(
             panelPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPetLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(14, 14, 14)
+                .addGroup(panelPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(panelPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panelPetLayout.createSequentialGroup()
                         .addGroup(panelPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(panelPetLayout.createSequentialGroup()
-                                .addGroup(panelPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(12, 12, 12)
-                                .addComponent(jLabel2))
+                            .addComponent(jLabel2)
                             .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel3))
-                    .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabel6))
+                    .addComponent(comboGender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
-                    .addComponent(comboTypes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboTypes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelPetLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelPetLayout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jLabel5))
-                    .addGroup(panelPetLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel5)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         btnDelete.setText("Obriši");
@@ -163,27 +170,27 @@ public class Pet extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(panelPet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(btnMakeChanges)
                 .addGap(31, 31, 31)
                 .addComponent(btnEdit)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
                 .addComponent(btnDelete)
                 .addGap(50, 50, 50)
                 .addComponent(btnSave)
                 .addGap(19, 19, 19))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(panelPet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addContainerGap(54, Short.MAX_VALUE)
                 .addComponent(panelPet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSave)
                     .addComponent(btnDelete)
@@ -198,15 +205,22 @@ public class Pet extends javax.swing.JDialog {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         try {
             domain.Pet pet = new domain.Pet();
-            pet.setId(Integer.valueOf(txtId.getText().trim()));
+            if(checkPet()){
             pet.setName(txtName.getText().trim());
             pet.setType((domain.Type)comboTypes.getSelectedItem());
             pet.setAge(Integer.valueOf(txtAge.getText().trim()));
             pet.setDescription(txtDescription.getText());
+            pet.setGender((Gender) comboGender.getSelectedItem());
             
-            Communication.getInstance().addPet(pet);
-            JOptionPane.showMessageDialog(this, "Ljubimac je uspešno dodat!");
-            this.dispose();
+            
+            if(Communication.getInstance().getAllPets().contains(pet)){
+                JOptionPane.showMessageDialog(this, "Ljubimac sa ovim karakteristikama već postoji u bazi!");
+            }else{
+                Communication.getInstance().addPet(pet);
+                JOptionPane.showMessageDialog(this, "Ljubimac je uspešno dodat!");
+                this.dispose();
+            }
+            }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
@@ -215,11 +229,12 @@ public class Pet extends javax.swing.JDialog {
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         try {
             domain.Pet pet = new domain.Pet();
-            pet.setId(Integer.valueOf(txtId.getText().trim()));
+            pet.setId(Integer.valueOf(txtId.getText()));
             pet.setName(txtName.getText().trim());
             pet.setType((domain.Type)comboTypes.getSelectedItem());
             pet.setAge(Integer.valueOf(txtAge.getText().trim()));
             pet.setDescription(txtDescription.getText());
+            pet.setGender((Gender) comboGender.getSelectedItem());
             
             Communication.getInstance().deletePet(pet);
             JOptionPane.showMessageDialog(this, "Ljubimac je uspešno obrisan!");
@@ -237,15 +252,18 @@ public class Pet extends javax.swing.JDialog {
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         try {
             domain.Pet pet = new domain.Pet();
-            pet.setId(Integer.valueOf(txtId.getText().trim()));
+            if(checkPet()){
+            pet.setId(Integer.valueOf(txtId.getText()));
             pet.setName(txtName.getText().trim());
             pet.setType((domain.Type)comboTypes.getSelectedItem());
             pet.setAge(Integer.valueOf(txtAge.getText().trim()));
             pet.setDescription(txtDescription.getText());
+            pet.setGender((Gender)comboGender.getSelectedItem());
             
             Communication.getInstance().editPet(pet);
             JOptionPane.showMessageDialog(this, "Ljubimac je uspešno ažuriran!");
             this.dispose();
+            }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
@@ -261,12 +279,14 @@ public class Pet extends javax.swing.JDialog {
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnMakeChanges;
     private javax.swing.JButton btnSave;
+    private javax.swing.JComboBox<Object> comboGender;
     private javax.swing.JComboBox<Object> comboTypes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel panelPet;
     private javax.swing.JTextField txtAge;
@@ -278,8 +298,9 @@ public class Pet extends javax.swing.JDialog {
     private void prepareForm(domain.Pet pet) {
         try {
             List<domain.Type> types = Communication.getInstance().getAllTypes();
-            
             getComboTypes().setModel(new DefaultComboBoxModel<>(types.toArray()));
+            
+            getComboGender().setModel(new DefaultComboBoxModel<>(Gender.values()));
             
             if(pet != null){
                 txtId.setText(String.valueOf(pet.getId()));
@@ -287,6 +308,7 @@ public class Pet extends javax.swing.JDialog {
                 txtAge.setText(String.valueOf(pet.getAge()));
                 txtDescription.setText(pet.getDescription());
                 comboTypes.setSelectedIndex(pet.getType().getId()-1);
+                comboGender.setSelectedItem(pet.getGender());
             }
         } catch (Exception ex) {
             Logger.getLogger(Pet.class.getName()).log(Level.SEVERE, null, ex);
@@ -295,6 +317,10 @@ public class Pet extends javax.swing.JDialog {
 
     public JComboBox<Object> getComboTypes() {
         return comboTypes;
+    }
+
+    public JComboBox<Object> getComboGender() {
+        return comboGender;
     }
 
     private void setupMode(FormMode formMode) {
@@ -332,5 +358,12 @@ public class Pet extends javax.swing.JDialog {
         }
     }
     
+    public boolean checkPet(){
+        if(txtName.getText() == null || txtName.getText().isEmpty() || txtAge.getText() == null || txtAge.getText().isEmpty() || txtDescription.getText() == null || txtDescription.getText().isEmpty() || comboGender.getSelectedIndex() == -1 || comboTypes.getSelectedIndex()==-1){
+            JOptionPane.showMessageDialog(this, "Sva polja moraju biti popunjena!");
+            return false;
+        }
+        return true;
+    }
     
 }

@@ -4,6 +4,7 @@
  */
 package main;
 
+import form.FrmMain;
 import server.Server;
 
 /**
@@ -15,6 +16,8 @@ public class Main {
     
     public static void main(String[] args){
         Server server = new Server();
-        server.startServer();
+        server.start();
+        FrmMain form = new FrmMain();
+        form.setVisible(true);
     }
 }

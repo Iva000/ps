@@ -12,6 +12,7 @@ import java.io.Serializable;
  */
 public enum Operation implements Serializable{
     LOGIN,
+    LOGOUT,
     PET_ADD,
     PERSON_ADD,
     GET_ALL_CITIES,
@@ -25,6 +26,8 @@ public enum Operation implements Serializable{
     SEARCH_PEOPLE,
     SEARCH_PETS,
     ADOPTION_ADD,
-    GET_ALL_ADOPTIONS
+    GET_ALL_ADOPTIONS,
+    GET_PERSON,
+    GET_PET
     
 }

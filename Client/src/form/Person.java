@@ -208,6 +208,7 @@ public class Person extends javax.swing.JDialog {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         try {
             domain.Person person = new domain.Person();
+            if(checkPerson()){
             person.setJmbg(txtJmbg.getText().trim());
             person.setName(txtName.getText().trim());
             person.setSurname(txtSurname.getText().trim());
@@ -215,10 +216,14 @@ public class Person extends javax.swing.JDialog {
             person.setYear(Integer.valueOf(txtYear.getText().trim()));
             person.setPhoneNumber(txtPhone.getText().trim());
             
-            Communication.getInstance().addPerson(person);
-            
-            JOptionPane.showMessageDialog(this, "Novi udomitelj je uspesno dodat!");
-            this.dispose();
+            if(Communication.getInstance().getAllPeople().contains(person)){
+                JOptionPane.showMessageDialog(this, "Osoba ovih karakretistika već postoji u bazi!");
+            }else{
+                Communication.getInstance().addPerson(person);
+                JOptionPane.showMessageDialog(this, "Novi udomitelj je uspesno dodat!");
+                this.dispose();
+            }
+            }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
@@ -250,6 +255,7 @@ public class Person extends javax.swing.JDialog {
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         try {
             domain.Person person = new domain.Person();
+            if(checkPerson()){
             person.setJmbg(txtJmbg.getText().trim());
             person.setName(txtName.getText().trim());
             person.setSurname(txtSurname.getText().trim());
@@ -260,6 +266,7 @@ public class Person extends javax.swing.JDialog {
             
             JOptionPane.showMessageDialog(this, "Udomitelj je uspešno izmenjen!");
             this.dispose();
+            }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         }
@@ -350,7 +357,13 @@ public class Person extends javax.swing.JDialog {
         }
     }
     
-    
+    public boolean checkPerson(){
+        if(txtJmbg.getText()== null || txtJmbg.getText().isEmpty() || txtName.getText()== null || txtName.getText().isEmpty() || txtSurname.getText()== null || txtSurname.getText().isEmpty() || txtPhone.getText()== null || txtPhone.getText().isEmpty() || txtYear.getText()== null || txtYear.getText().isEmpty() || comboCity.getSelectedIndex()== -1){
+            JOptionPane.showMessageDialog(this, "Sva polja moraju biti popunjena!");
+            return false;
+        }
+        return true;
+    }
     
     
 }

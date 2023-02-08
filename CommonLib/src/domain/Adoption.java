@@ -5,6 +5,8 @@
 package domain;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -12,12 +14,12 @@ import java.util.Objects;
  *
  * @author Iva
  */
-public class Adoption implements Serializable{
+public class Adoption implements GenericEntiy{
     
     Person person;
     Pet pet;
     LocalDate date;
-    boolean firstTime;
+    Boolean firstTime;
     String vetReport;
 
     public Adoption() {
@@ -107,6 +109,53 @@ public class Adoption implements Serializable{
             return false;
         }
         return Objects.equals(this.date, other.date);
+    }
+
+    @Override
+    public String getTableName() {
+        return "adoption";
+    }
+
+    @Override
+    public String getInsertColumns() {
+        return "date, firstTime, vetReport, petId, personId";
+    }
+
+    @Override
+    public String getInsertValues() {
+        return "'" + date + "', " + firstTime + ", '" + vetReport + "', " + pet.getId() + ", '" + person.getJmbg()+"'";
+    }
+
+    @Override
+    public void setId(Object id) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public String getUpdateValues() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public String getIndentificator() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public GenericEntiy getEntiy(ResultSet rs) throws SQLException{
+        Pet pet = new Pet();
+        Person person = new Person();
+        return new Adoption((Person)person.getEntiy(rs), (Pet) pet.getEntiy(rs), rs.getDate("date").toLocalDate(), rs.getBoolean("firstTime"), rs.getString("vetReport"));
+    }
+
+    @Override
+    public String getJoinText() {
+        return " INNER JOIN PET ON ADOPTION.PETID = PET.ID INNER JOIN PERSON ON ADOPTION.PERSONID = PERSON.JMBG INNER JOIN TYPE ON PET.TYPE = TYPE.ID ";
+    }
+
+    @Override
+    public String getSelectValues(Object param) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     

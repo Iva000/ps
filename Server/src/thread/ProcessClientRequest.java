@@ -13,9 +13,11 @@ import domain.Adoption;
 import domain.Person;
 import domain.Pet;
 import domain.User;
+import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import server.Server;
 
 /**
  *
@@ -26,6 +28,9 @@ public class ProcessClientRequest extends Thread{
     Socket socket;
     Sender sender;
     Receiver receiver;
+    Server server;
+    User user;
+    boolean flag = true;
 
     public ProcessClientRequest(Socket socket) {
         this.socket = socket;
@@ -33,9 +38,13 @@ public class ProcessClientRequest extends Thread{
         receiver = new Receiver(socket);
     }
 
+    public void setServer(Server server) {
+        this.server = server;
+    }
+
     @Override
     public void run() {
-        while(true){
+        while(!socket.isClosed()){
             try {
                 Request request = (Request)receiver.receive();
                 Response response = new Response();
@@ -43,7 +52,10 @@ public class ProcessClientRequest extends Thread{
                     switch(request.getOperation()){
                         case LOGIN: 
                             User user = (User) request.getArgument();
-                            response.setResult(Controller.getInstance().login(user.getUsername(), user.getPassword()));
+                            User me = Controller.getInstance().login(user);
+                            response.setResult(me);
+                            this.user = me;
+                            server.refreshTable(this);
                             break;
                         case PERSON_ADD:
                             Person person = (Person) request.getArgument();
@@ -82,12 +94,13 @@ public class ProcessClientRequest extends Thread{
                             Controller.getInstance().editPet(pet);
                             break;
                         case SEARCH_PEOPLE:
-                            String syllable = (String) request.getArgument();
-                            response.setResult(Controller.getInstance().searchPeople(syllable));
+                            person = (Person) request.getArgument();
+                            response.setResult(Controller.getInstance().searchPeople(person));
                             break;
                         case SEARCH_PETS:
-                            syllable = (String) request.getArgument();
-                            response.setResult(Controller.getInstance().searchPets(syllable));
+                            pet = (Pet) request.getArgument();
+                            System.out.println(request.getArgument());
+                            response.setResult(Controller.getInstance().searchPets(pet));
                             break;
                         case ADOPTION_ADD:
                             Adoption adoption = (Adoption)request.getArgument();
@@ -95,6 +108,18 @@ public class ProcessClientRequest extends Thread{
                             break;
                         case GET_ALL_ADOPTIONS:
                             response.setResult(Controller.getInstance().getAllAdoptions());
+                            break;
+                        case GET_PERSON:
+                            person = (Person) request.getArgument();
+                            response.setResult(Controller.getInstance().getPerson(person));
+                            break;
+                        case GET_PET:
+                            pet = (Pet) request.getArgument();
+                            response.setResult(Controller.getInstance().getPet(pet));
+                            break;
+                        case LOGOUT:
+                            server.delete(this);
+                            flag = false;
                             break;
                     }
                 }catch(Exception e){
@@ -108,6 +133,17 @@ public class ProcessClientRequest extends Thread{
         }
     }
     
+     public void closeSocket() {
+        flag = false;
+        try {
+            socket.close();
+        } catch (IOException ex) {
+            Logger.getLogger(ProcessClientRequest.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
+    public User getUser() {
+        return user;
+    }
     
 }

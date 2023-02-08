@@ -116,10 +116,12 @@ public class ViewPets extends javax.swing.JDialog {
          try {
             int index = tblPets.getSelectedRow();
             if(index == -1){
-                JOptionPane.showMessageDialog(this, "Morate izabrati osobu iz tabele!");
+                JOptionPane.showMessageDialog(this, "Morate izabrati ljubimca iz tabele!");
             }else{
-                List<domain.Pet> pets = Communication.getInstance().getAllPets();
-                domain.Pet pet = pets.get(index);
+                domain.Pet pet = new domain.Pet();
+                int id = ((PetTableModel)tblPets.getModel()).getId(index);
+                pet.setId(id);
+                pet = Communication.getInstance().getPet(pet);
                 Pet form = new Pet(null, true, FormMode.FORM_VIEW, pet);
                 form.setVisible(true);
             }
@@ -130,8 +132,10 @@ public class ViewPets extends javax.swing.JDialog {
 
     private void txtSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyTyped
         try {
-            String syllable = txtSearch.getText().trim();
-            tblPets.setModel(new PetTableModel(Communication.getInstance().searchPets(syllable)));
+            String n = txtSearch.getText().trim();
+            domain.Pet pet = new domain.Pet();
+            pet.setName(n);
+            tblPets.setModel(new PetTableModel(Communication.getInstance().searchPets(pet)));
         } catch (Exception ex) {
             Logger.getLogger(ViewPeople.class.getName()).log(Level.SEVERE, null, ex);
         }

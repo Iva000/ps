@@ -9,6 +9,7 @@ import domain.User;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
 
 /**
  *
@@ -48,6 +49,12 @@ public class Login extends javax.swing.JFrame {
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
+            }
+        });
+
+        txtPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPasswordActionPerformed(evt);
             }
         });
 
@@ -93,7 +100,7 @@ public class Login extends javax.swing.JFrame {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         try {
             String username = txtUsername.getText();
-            String password = txtPassword.getText();
+            String password = String.copyValueOf(getTxtPassword().getPassword());
             validateForm(username, password);
             
             User user = Communication.getInstance().login(username, password);
@@ -107,6 +114,10 @@ public class Login extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPasswordActionPerformed
 
     /**
      * @param args the command line arguments
@@ -160,4 +171,10 @@ public class Login extends javax.swing.JFrame {
         if(!error.isEmpty())
             throw new Exception("You must fill username and password!");
     }
+
+    public JPasswordField getTxtPassword() {
+        return txtPassword;
+    }
+    
+    
 }

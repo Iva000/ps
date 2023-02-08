@@ -5,13 +5,15 @@
 package domain;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Objects;
 
 /**
  *
  * @author Iva
  */
-public class Person implements Serializable{
+public class Person implements GenericEntiy{
     
     private String jmbg;
     private String name;
@@ -110,6 +112,52 @@ public class Person implements Serializable{
     @Override
     public String toString() {
         return getJmbg() + ", " + getName() + " " + getSurname();
+    }
+
+    @Override
+    public String getTableName() {
+        return "person";
+    }
+
+    @Override
+    public String getInsertColumns() {
+        return " jmbg, name, surname, year_of_birth, city, phone_number ";
+    }
+
+    @Override
+    public String getInsertValues() {
+        return "'" + jmbg + "', '" + name + "', '" + surname + "', " + year + ", " + city.getId() + ", '" + phoneNumber+"'";
+    }
+
+    @Override
+    public void setId(Object id) {
+        this.jmbg = (String) jmbg;
+    }
+
+    @Override
+    public String getUpdateValues() {
+        return "name ='"+ name + "', surname='" + surname + "', year_of_birth=" +year+", city="+ city.getId() + ", phone_number='"+ phoneNumber+"'";
+    }
+
+    @Override
+    public String getIndentificator() {
+        return " person.jmbg=" + jmbg;
+    }
+
+    @Override
+    public GenericEntiy getEntiy(ResultSet rs) throws SQLException{
+        City city = new City();
+        return new Person(rs.getString("jmbg"), rs.getString("person.name"), rs.getString("surname"), rs.getInt("year_of_birth"), (City)city.getEntiy(rs), rs.getString("phone_number"));
+    }
+
+    @Override
+    public String getJoinText() {
+        return " INNER JOIN CITY ON PERSON.CITY=CITY.ID ";
+    }
+
+    @Override
+    public String getSelectValues(Object param) {
+        return " WHERE person.surname LIKE '%"+((Person) param).getSurname()+"%'";
     }
     
     
