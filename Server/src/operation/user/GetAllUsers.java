@@ -29,20 +29,16 @@ public class GetAllUsers extends AbstractGenericOperation{
     protected void executeOperation(Object param) throws Exception {
         users = repository.getAll(param);
         for (User user1 : users) {
-            //System.out.println(user1);
             if(user1.getUsername().equals(((User)param).getUsername()) && ((User) param).getPassword().equals(user1.getPassword())){
-                //System.out.println("Pronasao ga je! User Postoji");
                 this.user = user1;
-                //flag = true;
                 break;
             }
         }
     }
     
      public User getUserLogin() throws Exception{
-        System.out.println("LOGIN");
         if (user==null) {
-              throw new Exception("User does not exsist!");
+              throw new Exception("Korisnik ne postoji!");
         }
         return user;
     }

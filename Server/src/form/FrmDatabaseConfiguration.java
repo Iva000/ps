@@ -109,7 +109,6 @@ public class FrmDatabaseConfiguration extends javax.swing.JDialog {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         try {
-            validateFields();
             String url = txtUrl.getText().trim();
             String username = txtUsername.getText().trim();
             String password = txtPassword.getText().trim();
@@ -182,21 +181,7 @@ public class FrmDatabaseConfiguration extends javax.swing.JDialog {
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 
-    private void validateFields() throws Exception {
-         String error = "";
-        if (txtUrl.getText().isEmpty()) {
-            error += "Url cannot be empty!\n";
-        }
-        if (txtUsername.getText().isEmpty()) {
-            error += "Username cannot be empty!\n";
-        }
-        if (txtPassword.getText().isEmpty()) {
-            error += "Password annot be empty!\n";
-        }
-        if (!error.isEmpty()) {
-            throw new Exception(error);
-        }
-    }
+
     
      private void setDefault() {
         try {

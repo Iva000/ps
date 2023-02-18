@@ -54,12 +54,7 @@ public class PeopleTableModel extends AbstractTableModel{
     public String getColumnName(int column) {
         return columns[column];
     }
-    
-    public void refresh(List<Person> people){
-        this.people = people;
-        fireTableDataChanged();
-    }
-    
+ 
     public String getJmbg(int row){
         Person person = people.get(row);
         return person.getJmbg();

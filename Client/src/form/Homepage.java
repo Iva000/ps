@@ -76,7 +76,7 @@ public class Homepage extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Udomitelj");
+        jMenu2.setText("Vlasnik");
 
         jMenuItem5.setText(" Dodaj novog");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
@@ -146,6 +146,7 @@ public class Homepage extends javax.swing.JFrame {
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         Pet form = new Pet(this, true, FormMode.FORM_ADD, null);
+        form.setLocationRelativeTo(null);
         form.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
@@ -156,11 +157,13 @@ public class Homepage extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         ViewPets view = new ViewPets(this, true);
+        view.setLocationRelativeTo(null);
         view.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         ViewPeople view = new ViewPeople(this, true);
+        view.setLocationRelativeTo(null);
         view.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
@@ -170,16 +173,17 @@ public class Homepage extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        ViewAdoptions form = new ViewAdoptions(this, true);
-        form.setVisible(true);
+        ViewAdoptions view = new ViewAdoptions(this, true);
+        view.setLocationRelativeTo(null);
+        view.setVisible(true);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
         int result = JOptionPane.showConfirmDialog(this, "Da li želite da se odjavite?");
         if(result == JOptionPane.YES_OPTION){
             try {
-                Communication.getInstance().logOut();
-                JOptionPane.showMessageDialog(this, "Odjavili ste se!");
+                String message =  Communication.getInstance().logOut();
+                JOptionPane.showMessageDialog(this, message);
                 this.dispose();
             } catch (Exception ex) {
                 Logger.getLogger(Homepage.class.getName()).log(Level.SEVERE, null, ex);
@@ -187,7 +191,7 @@ public class Homepage extends javax.swing.JFrame {
         }else if (result == JOptionPane.NO_OPTION){
                
         }
-        this.dispose();
+        
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     /**

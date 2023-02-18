@@ -29,8 +29,10 @@ public class Person extends javax.swing.JDialog {
     private FormMode formMode;
     
     public Person(java.awt.Frame parent, boolean modal, FormMode formMode, domain.Person person) {
-        super(parent, modal);
+        super(parent,"Dodavanje novog vlasnika", modal);
         initComponents();
+        pack();
+        this.setLocationRelativeTo(null);
         this.formMode = formMode;
         prepareForm(person);
         setupMode(formMode);
@@ -65,7 +67,7 @@ public class Person extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Udomitelj"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Vlasnik"));
 
         jLabel1.setText("JMBG:");
 
@@ -179,14 +181,12 @@ public class Person extends javax.swing.JDialog {
                         .addComponent(btnMakeChanges)
                         .addGap(40, 40, 40)
                         .addComponent(btnEdit)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(37, 37, 37)
                         .addComponent(btnDelete)
-                        .addGap(67, 67, 67)
-                        .addComponent(btnSave)
-                        .addGap(31, 31, 31))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(98, Short.MAX_VALUE))))
+                        .addGap(36, 36, 36)
+                        .addComponent(btnSave))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -217,10 +217,10 @@ public class Person extends javax.swing.JDialog {
             person.setPhoneNumber(txtPhone.getText().trim());
             
             if(Communication.getInstance().getAllPeople().contains(person)){
-                JOptionPane.showMessageDialog(this, "Osoba ovih karakretistika već postoji u bazi!");
+                JOptionPane.showMessageDialog(this, "Vlasnik ovih karakretistika već postoji u bazi!");
             }else{
                 Communication.getInstance().addPerson(person);
-                JOptionPane.showMessageDialog(this, "Novi udomitelj je uspesno dodat!");
+                JOptionPane.showMessageDialog(this, "Novi vlasnik je uspesno dodat!");
                 this.dispose();
             }
             }
@@ -245,7 +245,7 @@ public class Person extends javax.swing.JDialog {
             person.setPhoneNumber(txtPhone.getText().trim());
             Communication.getInstance().deletePerson(person);
             
-            JOptionPane.showMessageDialog(this, "Udomitelj je uspešno obrisan!");
+            JOptionPane.showMessageDialog(this, "Vlasnik je uspešno obrisan!");
             this.dispose();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage());
@@ -264,7 +264,7 @@ public class Person extends javax.swing.JDialog {
             person.setPhoneNumber(txtPhone.getText().trim());
             Communication.getInstance().editPerson(person);
             
-            JOptionPane.showMessageDialog(this, "Udomitelj je uspešno izmenjen!");
+            JOptionPane.showMessageDialog(this, "Vlasnik je uspešno izmenjen!");
             this.dispose();
             }
         } catch (Exception ex) {

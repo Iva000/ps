@@ -24,7 +24,7 @@ public class ViewPeople extends javax.swing.JDialog {
      * Creates new form ViewPeople
      */
     public ViewPeople(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+        super(parent,"Prikaz svih vlasnika", modal);
         initComponents();
         prepareView();
     }
@@ -80,25 +80,24 @@ public class ViewPeople extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 607, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jButton1))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1)))
-                .addContainerGap(11, Short.MAX_VALUE))
+                        .addGap(33, 33, 33)
+                        .addComponent(jButton1)))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(jButton1)
@@ -116,16 +115,16 @@ public class ViewPeople extends javax.swing.JDialog {
         try {
             int index = tblPeople.getSelectedRow();
             if(index == -1){
-                JOptionPane.showMessageDialog(this, "Morate izabrati osobu iz tabele!");
+                JOptionPane.showMessageDialog(this, "Morate izabrati vlasnika iz tabele!");
             }else{
                 domain.Person person = new domain.Person();
                 String jmbg = ((PeopleTableModel) tblPeople.getModel()).getJmbg(index);
                 person.setJmbg(jmbg);
-//                List<domain.Person> people = Communication.getInstance().getAllPeople();
-//                domain.Person person = people.get(index);
                 person = Communication.getInstance().getPerson(person);
                 Person form = new Person(null, true, FormMode.FORM_VIEW, person);
+                form.setLocationRelativeTo(null);
                 form.setVisible(true);
+                this.dispose();
             }
         } catch (Exception ex) {
             Logger.getLogger(ViewPeople.class.getName()).log(Level.SEVERE, null, ex);

@@ -38,24 +38,8 @@ import repository.db.DbRepository;
  * @author Iva
  */
 public class Controller {
-    
-//    private final Repository repositoryUser;
-//    private final Repository repositoryPerson;
-//    private final Repository repositoryCity;
-//    private final Repository repositoryType;
-//    private final Repository repositoryPet;
-//    private final Repository repositoryAdoption;
-    
-    private static Controller instance;
 
-//    public Controller() {
-//        this.repositoryUser = new RepositoryDbUser();
-//        this.repositoryPerson = new RepositoryDbPerson();
-//        this.repositoryCity = new RepositoryDbCity();
-//        this.repositoryType = new RepositoryDbType();
-//        this.repositoryPet = new RepositoryDbPet();
-//        this.repositoryAdoption = new RepositoryDbAdoption();
-//    }
+    private static Controller instance;
 
     public static Controller getInstance() {
         if(instance == null){

@@ -22,7 +22,7 @@ public class ViewAdoptions extends javax.swing.JDialog {
      * Creates new form ViewAdoptions
      */
     public ViewAdoptions(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+        super(parent,"Prikaz svim udomljavanja", modal);
         initComponents();
         prepareForm();
     }

@@ -23,7 +23,7 @@ public class ViewPets extends javax.swing.JDialog {
      * Creates new form ViewPets
      */
     public ViewPets(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+        super(parent,"Prikaz svih ljubimaca", modal);
         initComponents();
         prepareView();
     }
@@ -86,11 +86,11 @@ public class ViewPets extends javax.swing.JDialog {
                         .addComponent(jButton1)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtSearch))
-                        .addGap(24, 24, 24))))
+                        .addContainerGap(24, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,7 +123,9 @@ public class ViewPets extends javax.swing.JDialog {
                 pet.setId(id);
                 pet = Communication.getInstance().getPet(pet);
                 Pet form = new Pet(null, true, FormMode.FORM_VIEW, pet);
+                form.setLocationRelativeTo(null);
                 form.setVisible(true);
+                this.dispose();
             }
         } catch (Exception ex) {
             Logger.getLogger(ViewPets.class.getName()).log(Level.SEVERE, null, ex);

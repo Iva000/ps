@@ -28,7 +28,7 @@ public class Pet extends javax.swing.JDialog {
     private FormMode formMode;
     
     public Pet(java.awt.Frame parent, boolean modal, FormMode formMode, domain.Pet pet) {
-        super(parent, modal);
+        super(parent,"Dodavanje novog ljubimca", modal);
         initComponents();
         this.formMode = formMode;
         prepareForm(pet);
@@ -175,11 +175,11 @@ public class Pet extends javax.swing.JDialog {
                 .addComponent(btnMakeChanges)
                 .addGap(31, 31, 31)
                 .addComponent(btnEdit)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                .addGap(101, 101, 101)
                 .addComponent(btnDelete)
                 .addGap(50, 50, 50)
                 .addComponent(btnSave)
-                .addGap(19, 19, 19))
+                .addContainerGap(19, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addComponent(panelPet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,7 +188,7 @@ public class Pet extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
+                .addGap(54, 54, 54)
                 .addComponent(panelPet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)

@@ -14,11 +14,11 @@ import java.sql.SQLException;
  */
 public interface GenericEntiy extends Serializable{
     
-    String getTableName();
+    public String getTableName();
 
-    String getInsertColumns();
+    public String getInsertColumns();
 
-    String getInsertValues();
+    public String getInsertValues();
 
     void setId(Object id);
 

@@ -62,7 +62,9 @@ public class Communication {
     public String logOut() throws Exception {
         Request request = new Request(null, Operation.LOGOUT);
         sender.send(request);
+        
         Response response = (Response) receiver.receive();
+        
         if (response.getException() == null) {
             return  response.getResult().toString();
         } else {

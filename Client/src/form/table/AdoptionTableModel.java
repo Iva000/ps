@@ -19,7 +19,7 @@ import javax.swing.table.AbstractTableModel;
 public class AdoptionTableModel extends AbstractTableModel{
 
     List<Adoption> adoptions;
-    String[] columns = {"Udomitelj", "Ljubimac", "Datum", "Da li osoba prvi put udomljava", "Izveštaj veterinara"};
+    String[] columns = {"Vlasnik", "Ljubimac", "Datum", "Da li osoba prvi put udomljava", "Izveštaj veterinara"};
 
     public AdoptionTableModel(List<Adoption> adoptions) {
         this.adoptions = adoptions;

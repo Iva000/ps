@@ -30,7 +30,7 @@ public class FrmMain extends javax.swing.JFrame {
         super("Serverski program");
         initComponents();
         prepareForm();
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setLocationRelativeTo(null);
         btnStop.setEnabled(false);
         lblStatus.setText("Server nije pokrenut!");
         lblStatus.setForeground(Color.red);
@@ -58,6 +58,7 @@ public class FrmMain extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         lblStat.setText("Status servera:");
 
@@ -148,18 +149,25 @@ public class FrmMain extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblStat)
-                        .addGap(62, 62, 62)
-                        .addComponent(lblStatus))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(91, 91, 91)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnStart)
-                        .addGap(84, 84, 84)
-                        .addComponent(btnStop)))
-                .addContainerGap(74, Short.MAX_VALUE))
+                        .addGap(110, 110, 110)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnStart)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblStat)
+                                .addGap(43, 43, 43)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(152, 152, 152)
+                                .addComponent(btnStop))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(lblStatus)))))
+                .addContainerGap(183, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,9 +180,9 @@ public class FrmMain extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnStart)
                     .addComponent(btnStop))
-                .addGap(31, 31, 31)
+                .addGap(29, 29, 29)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
 
         pack();
@@ -187,7 +195,7 @@ public class FrmMain extends javax.swing.JFrame {
                 
                 btnStop.setEnabled(false);
                 btnStart.setEnabled(true);
-                lblStatus.setText("Server is not active!");
+                lblStatus.setText("Server nije aktivan!");
                 lblStatus.setForeground(Color.red);
                 UserTableModel utm = (UserTableModel) tblUsers.getModel();
                 utm.refresh(new ArrayList<>());
@@ -206,7 +214,7 @@ public class FrmMain extends javax.swing.JFrame {
                 
                 btnStop.setEnabled(true);
                 btnStart.setEnabled(false);
-                lblStatus.setText("Server is active!");
+                lblStatus.setText("Server je aktivan!");
                 lblStatus.setForeground(Color.green);
             }catch(Exception ex){
                 Logger.getLogger(FrmMain.class.getName()).log(Level.SEVERE, null, ex);
@@ -215,11 +223,15 @@ public class FrmMain extends javax.swing.JFrame {
     }//GEN-LAST:event_btnStartActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        new FrmDatabaseConfiguration(this, true).setVisible(true);
+        FrmDatabaseConfiguration form = new FrmDatabaseConfiguration(this, true);
+        form.setLocationRelativeTo(null);
+        form.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        new FrmServerConfiguration(this, true).setVisible(true);
+        FrmServerConfiguration form = new FrmServerConfiguration(this, true);
+        form.setLocationRelativeTo(null);
+        form.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**

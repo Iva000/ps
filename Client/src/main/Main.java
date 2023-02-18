@@ -19,8 +19,6 @@ public class Main {
     public static void main(String[] args) {
         Login form = new Login();
         form.setVisible(true);
-//Homepage form = new Homepage();
-//form.setVisible(true);
     }
     
 }

@@ -118,6 +118,7 @@ public class ProcessClientRequest extends Thread{
                             response.setResult(Controller.getInstance().getPet(pet));
                             break;
                         case LOGOUT:
+                            response.setResult("Uspesna odjava!");
                             server.delete(this);
                             flag = false;
                             break;
@@ -127,6 +128,10 @@ public class ProcessClientRequest extends Thread{
                     response.setException(e);
                 }
                 sender.send(response);
+                if(!flag){
+                    return;
+                }
+                
             } catch (Exception ex) {
                 Logger.getLogger(ProcessClientRequest.class.getName()).log(Level.SEVERE, null, ex);
             }

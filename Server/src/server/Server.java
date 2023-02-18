@@ -55,8 +55,6 @@ public class Server extends Thread{
 
     @Override
     public void run() {
-        
-         
              while (true) {
                  try {
                      System.out.println("Waiting for connection....");
